@@ -18,12 +18,15 @@ var SoundManager = (function() {
 			this._mainNode.connect(this._context.destination);
 			this.enabled = true;
 		} catch(e) {
-			window.alert("Web Audio API is not supported in this browser");
+			//window.alert("Web Audio API is not supported in this browser");
+			this.enabled = false;
 		}
 
 	};
 	SM.prototype.load = function(path,callback) {
 		if (!this.enabled) {
+			// just not to be locked by ff incompatibility
+			this.counter += 1;
 			return false;
 		}
 		if (!callback) {

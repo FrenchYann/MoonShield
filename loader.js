@@ -9,10 +9,10 @@ var imageList = {};
 // images properly organized (mostly for animation)
 var ressources = {
 	'ui': [
-		'ui-spaceMineOn.png',
-		'ui-spaceMineOff.png',
-		'ui-artificialMoonOn.png',
-		'ui-artificialMoonOff.png'
+		'images/ui-spaceMineOn.png',
+		'images/ui-spaceMineOff.png',
+		'images/ui-artificialMoonOn.png',
+		'images/ui-artificialMoonOff.png'
 	],
 	'missile': [
 		'missile.png'
@@ -135,6 +135,15 @@ var ressources = {
 			imageList[sprite.filename] = img.dom;
 		});
 	}
+
+	// additionnal thingy to remove a glitch
+	forEach(ressources.ui,function (path) {
+		var image = new Image();
+		image.onload = function() {
+			imageList[path] = this;
+		};
+		image.src = path;
+	});
 
 
 })();
