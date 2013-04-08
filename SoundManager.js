@@ -49,7 +49,7 @@ var SoundManager = (function() {
 			self._context.decodeAudioData(
 				xhr.response,
 				function(buffer) {
-					console.log(clip.s.path,'loaded');
+					log(clip.s.path,'loaded');
 					clip.b = buffer;
 					clip.l = true;
 					self.clips[path] = clip;
@@ -57,7 +57,7 @@ var SoundManager = (function() {
 					callback(clip.s);
 				},
 				function (data) {
-					console.log("error loading sound",path,data);
+					log("error loading sound",path,data);
 				}
 			);
 		};

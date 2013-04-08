@@ -473,7 +473,6 @@ var engine = {
 			checkbox:true,
 			id:"mute"
 		},function() {
-			console.log("toggle");
 			soundManager.toggleMute();
 		});
 

@@ -123,7 +123,7 @@ var asteroid = function (settings) {
 	};
 	var superDestroy = asteroid.destroy;
 	asteroid.destroy = function(explode) {
-		console.log("destroy",explode);
+		log("destroy",explode);
 		engine.waves.kill();
 		if(explode) {
 			smallExplosion({
