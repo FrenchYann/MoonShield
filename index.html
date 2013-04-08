@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>	
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<script type="text/javascript" src="Box2dWeb-2.1.a.3.js"></script>
+<script type="text/javascript">
+	var DEBUG = false;
+</script>
+<script type="text/javascript" src="stats.min.js"></script>
+<script type="text/javascript">
+	var stats = new Stats();
+	stats.setMode(0); // 0: fps, 1: ms
+
+	// Align top-left
+	stats.domElement.style.position = 'absolute';
+	stats.domElement.style.left = '0px';
+	stats.domElement.style.top = '0px';
+
+
+</script>	
+<script type="text/javascript" src="Point.js"></script>
+<script type="text/javascript" src="Camera.js"></script>
+<script type="text/javascript" src="Layer.js"></script>
+<script type="text/javascript" src="Animation.js"></script>
+<script type="text/javascript" src="Finance.js"></script>
+<script type="text/javascript" src="SoundManager.js"></script>
+<script type="text/javascript" src="Waves.js"></script>
+<script type="text/javascript" src="tools.js"></script>
+<script type="text/javascript" src="collision.js"></script>
+<script type="text/javascript" src="UI.js"></script>
+<script type="text/javascript" src="dialog.js"></script>
+<script type="text/javascript" src="entity.js"></script>
+<script type="text/javascript" src="fx.js"></script>
+<script type="text/javascript" src="moon.js"></script>	
+<script type="text/javascript" src="planet.js"></script>
+<script type="text/javascript" src="missile.js"></script>
+<script type="text/javascript" src="spaceMine.js"></script>	
+<script type="text/javascript" src="asteroid.js"></script>
+<script type="text/javascript" src="unitTest.js"></script>
+<script type="text/javascript" src="shop.js"></script>
+<script type="text/javascript" src="loader.js"></script>
+<script type="text/javascript" src="controls.js"></script>
+<script type="text/javascript" src="core.js"></script>
+	<style>
+		#results li.pass { color: green; display:none; }
+		#results li.fail { color: red; }
+		#results {
+			position:absolute;
+		}
+		html,body,#game {
+			background:#000;
+			margin:0;
+			padding:0;
+			font-family: Verdana, sans-serif;
+			color:#86533d;
+		}
+
+		a {
+			color:#c8a576;
+			text-decoration:none;
+		}
+
+		a:hover {
+			color:#faffac;
+		}
+
+
+		#game {
+			background:#02020F;
+		}
+		#main {
+			position:absolute;
+			top:0;
+			left:0;
+			overflow:hidden;
+		}
+		#dialog {
+			position:relative;
+			width:500px;
+			background:rgba(0,0,0,0.5);
+			padding:10px;
+			color:#aaa;
+			min-height: 128px;
+			font-size:1.2em;
+			border-radius: 10px;
+			border:1px solid #333;
+
+			background:rgba(0,0,0,0.8);
+			border:1px solid #008020;
+		}
+		#dialog img {
+			float:left;
+		}
+
+		#dialogButton {
+			position:relative;
+		}
+
+		#build-menu {
+			list-style-type: none;
+		}
+		
+
+
+		.ui-state-default 
+		{
+			border:1px solid #008020;
+			color:#008020;
+
+			background:#000;
+		}
+
+		.ui-state-hover {
+			border:1px solid #00ff40;
+			background:#002220;
+			color:#00ff40;
+		}
+
+		.ui-state-active {
+			background:#220020;
+			border:1px solid #ff0040;
+			color:#ff0040;
+		}
+
+
+
+		#build-menu {
+			position:absolute;
+			padding:0;
+			margin:0;
+			font-size:90%;
+		}
+		#build-menu .cost{
+			text-align: center;
+			font-size:80%;
+		}
+		#build-menu div {
+			margin:10px;
+			padding:10px;
+			background:transparent;
+			background:rgba(0,128,32,0.2);
+			border:1px solid #008020;
+			color:#008020;
+		}
+		#build-menu div.ui-state-hover {
+			background:rgba(0,128,32,0.4);
+			border:1px solid #00ff40;
+			color:#00ff40;
+		}
+		#build-menu div.ui-state-active {
+			background:rgba(128,0,32,0.4);
+			border:1px solid #ff0040;
+			color:#ff0040;
+		}
+		#build-menu div.disabled {
+			background:rgba(128,128,128,0.4);
+			border:1px solid #aaa;
+			color:#aaa;
+		}
+		#zoom-slider {
+			position:absolute;
+			color:#aaa;
+		}
+		#zoom-slider div {
+			height:200px;
+			width:8px;
+			border:1px solid #008020;
+			background:none;
+		}
+		#zoom-slider .ui-slider-handle {
+			width:16px;
+			border:1px solid #008020;
+			background:#008020;
+		}
+		#zoom-slider .ui-state-hover {
+			border:1px solid #00ff40;
+		}
+
+		#finance, #wave {
+			position:absolute;
+			width: 200px;
+			text-align: right;
+			border-radius: 10px;
+			background:rgba(0,0,0,0.5);
+			padding:10px;
+
+			border:1px solid #008020;
+			color:#00ff40;
+			color:#00bf30;
+		}
+		#wave {
+			text-align: left;
+		}
+		#dummy {
+			position:absolute;
+			float:left;
+		}
+		#title {
+			position:absolute;
+			background:url(images/title.png);
+		}
+		#credits {
+			position:absolute;
+		}
+		#pause-div label,#mute-div label {
+			width:100px;
+		}
+	</style>
+<script type="text/javascript">
+
+
+</script>
+</head>
+<body>
+	<div id="main">
+		<canvas id="game"></canvas>
+	</div>
+	<ul id="results"></ul>
+
+
+
+</body>
+</html>

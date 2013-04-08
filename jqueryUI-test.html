@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>	
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+<style type="text/css">
+	body {
+		margin:0;
+		padding:0;
+	}
+	div {
+		position:absolute;
+		width:500px;
+		height:128px;
+		border:1px solid black;
+		padding:10px;
+		padding-left:148px;
+	}
+
+	#container {
+		position:absolute;
+		margin:0;
+		padding:0;
+		border:none;
+	}
+
+	img {
+		float:left;
+		display:block;
+		margin:0;
+	}
+	button {
+		position:absolute;
+	}
+
+</style>
+<script type="text/javascript">
+	$(function() {
+		$("#container").width(window.innerWidth);
+		$("#container").height(window.innerHeight);
+		var $div = $('<div/>')
+			.appendTo(document.body)
+			.position({
+				my:"left bottom",
+				at:"left+20 bottom-50",
+				of:$("#container")
+			})
+			.css("background","url(images/obama.png) 10px 10px no-repeat");
+		var $text = $('<span/>').appendTo($div).text("blar blaaa blaaa");
+		var $button = $('<button/>')
+						.button({
+							label:"plop"
+						})
+						.appendTo($div)
+						.position({
+							my:"right bottom",
+							at:"right bottom",
+							of:$div
+						});
+	});
+</script>
+
+	</head>
+
+	<body>
+		<div id="container"></div>
+
+
+	</body>
+
+</html>
