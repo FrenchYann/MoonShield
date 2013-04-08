@@ -56,10 +56,6 @@ var dialog = function(sequence,settings,$parent) {
 	}
 	//public properties
 	var ini = {
-		/*
-		hotspot:"left bottom",
-		anchor:"left+20 bottom-50",
-		*/
 		hotspot:"center center",
 		anchor:"center center-100",
 		id:"dialog"

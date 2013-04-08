@@ -9,6 +9,7 @@ var SoundManager = (function() {
 		this.enabled   = false;
 		this._context  = null;
 		this._mainNode = null;
+		this.counter   = 0;
 
 
 		try {
@@ -52,6 +53,7 @@ var SoundManager = (function() {
 					clip.b = buffer;
 					clip.l = true;
 					self.clips[path] = clip;
+					self.counter += 1;
 					callback(clip.s);
 				},
 				function (data) {

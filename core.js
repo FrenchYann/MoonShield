@@ -1,6 +1,6 @@
 /* exported engine */
 /* exported b2Body, b2CircleShape */
-/* global	$, spawnableList, DEBUG, stats, log,Finance, missile, Camera, story, requestAnimFrame, UI, time,Layer,planet,unitTest,asteroid, initControls*/
+/* global	$, spawnable, sounds,Waves, playSoundInstance, soundManager, spawnableList, DEBUG, stats, log,Finance, missile, Camera, story, requestAnimFrame, UI, time,Layer,planet,unitTest,asteroid, initControls*/
 "use strict";
 
 // Box2D
@@ -84,11 +84,45 @@ var engine = {
 		if(DEBUG) {
 			unitTest();
 		}
-		this.startMenu();
 
-		initControls();
-		this.updating = true;
-		this.update();
+		function waitForSound() {
+			var barSize = new Point(400,20);
+			if(soundManager.counter < Object.keys(sounds).length) {
+				var ctx = engine.context;
+				var center = engine.frame.half();
+				var ratio = soundManager.counter/Object.keys(sounds).length;
+				ctx.clearRect(0,0,engine.frame.x,engine.frame.y);
+				ctx.fillStyle = 'hsl(0,10%,30%)';
+				var x = center.x-barSize.x/2;
+				var y = center.y-barSize.y/2;
+				ctx.fillRect(
+					x,y,
+					barSize.x,barSize.y);
+				ctx.fillStyle = "red";
+				ctx.fillRect(
+					x,y,
+					barSize.x*ratio,barSize.y);
+				ctx.strokeStyle = "black";
+				ctx.strokeRect(
+					x,y,
+					barSize.x,barSize.y);
+				ctx.textAlign = 'center';
+				ctx.textBaseline = 'middle';
+				ctx.font = 'bold 18px Trebuchet ms';
+				ctx.fillStyle = 'hsl(0,100%,90%)';
+				ctx.fillText(Math.round(ratio*100)+"%",center.x,center.y);
+
+
+				setTimeout(waitForSound,engine.FRAME_RATE);
+			} else {
+				engine.startMenu();
+
+				initControls();
+				engine.updating = true;
+				engine.update();
+			}			
+		}
+		waitForSound();
 	},
 	destroyAll: function() {
 		// recursively destroy layer and their content
