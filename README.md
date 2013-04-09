@@ -30,9 +30,6 @@ Good luck :D
 #License
 I hereby declare releasing this game (code and assets) under a Creative Commons CC BY-NC-SA license 
 
-#Side Note
-Sorry I didn't have time to build an atlas and code this part. So individual asset loading. Hope it won't be a problem (:
-
   [1]: http://dl.dropbox.com/u/23551572/javascript/MoonShield/index.html
   [2]: https://dl.dropbox.com/u/23551572/javascript/MoonShield/screenshots/title-screen.jpg
   [3]: https://dl.dropbox.com/u/23551572/javascript/MoonShield/screenshots/in-game01.jpg
