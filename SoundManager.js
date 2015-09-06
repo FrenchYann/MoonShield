@@ -13,8 +13,8 @@ var SoundManager = (function() {
 
 
 		try {
-			this._context = new webkitAudioContext();
-			this._mainNode = this._context.createGainNode(0);
+			this._context = new AudioContext();
+			this._mainNode = this._context.createGain(0);
 			this._mainNode.connect(this._context.destination);
 			this.enabled = true;
 		} catch(e) {
@@ -81,11 +81,14 @@ var SoundManager = (function() {
 
 		var audioBuffer = this._context.createBufferSource();
 		audioBuffer.buffer = clip.b;
-		audioBuffer.gain.value = volume;
 		audioBuffer.loop = looping;
-
-		audioBuffer.connect(this._mainNode);
-        audioBuffer.noteOn(0);
+		
+		var gain = this._context.createGain();
+		audioBuffer.connect(gain);
+		gain.gain.value = volume;
+		gain.connect(this._context.destination);
+		
+		audioBuffer.start(0);
 
         return true;
 
@@ -101,7 +104,7 @@ var SoundManager = (function() {
 			return false;
 		}
 		this._mainNode.disconnect();
-		this._mainNode = this._context.createGainNode(0);
+		this._mainNode = this._context.createGain();
 		this._mainNode.connect(this._context.destination);
 	};
 	SM.prototype.toggleMute = function() {
